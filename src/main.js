@@ -1,6 +1,9 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
+import App from "./App.vue";
+import router from "./router";
+
 // 載入bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
@@ -30,9 +33,6 @@ configure({
   validateOnInput: true, // 調整為：輸入文字時，就立即進行驗證
 });
 setLocale("zh_TW");
-
-import App from "./App.vue";
-import router from "./router";
 
 // import "./assets/main.css";
 
