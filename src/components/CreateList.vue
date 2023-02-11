@@ -97,7 +97,7 @@ import {
   useField,
 } from "vee-validate";
 import AllRules from "@vee-validate/rules";
-import { loadLocaleFromURL, localize } from "@vee-validate/i18n";
+import { loadLocaleFromURL, localize, setLocale } from "@vee-validate/i18n";
 // 載入全部驗證
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule]);
@@ -109,6 +109,7 @@ configure({
   generateMessage: localize("zh_TW"),
   validateOnInput: true, // 調整為：輸入文字時，就立即進行驗證
 });
+setLocale("zh_TW");
 
 const axios = inject("axios");
 // ---------------------------------------------
