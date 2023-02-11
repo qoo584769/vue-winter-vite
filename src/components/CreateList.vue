@@ -120,13 +120,13 @@ const phoneRef = toRef(props, "phone");
 const { errorMessage, value } = useField(phoneRef, isrequired);
 
 // 建立訂單按鈕
-const onSubmit = () => {
+const onSubmit = async () => {
   if (isrequired(user.tel) !== "需要正確的電話號碼") {
     const data = {
       user,
       message: message.value,
     };
-    axios
+    await axios
       .post(`${url}/api/${path}/order`, { data })
       .then(() => {
         user.email = "";
@@ -135,11 +135,11 @@ const onSubmit = () => {
         user.address = "";
         message.value = "";
         alert("訂單建立成功");
-        emits("emitGetCart");
       })
       .catch((err) => {
         alert(err);
       });
+    emits("emitGetCart");
   }
 };
 </script>
