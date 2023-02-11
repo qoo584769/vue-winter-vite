@@ -42,7 +42,6 @@
           placeholder="請輸入電話"
           rules="required"
           v-model="value"
-          :value="user.tel"
         ></Field>
         <span class="text-danger mt-2 d-block fs-6" v-if="isrequired">{{
           errorMessage
@@ -110,35 +109,36 @@ const isrequired = (value) => {
     const phoneNumber = /^(09)[0-9]{8}$/;
     user.tel = value;
     return phoneNumber.test(value) ? true : "需要正確的電話號碼";
-  } else if (value === "") {
+  }
+  if (typeof parseInt(value) === "number") {
     return value;
   }
+  return "";
 };
 const phoneRef = toRef(props, "phone");
 const { errorMessage, value } = useField(phoneRef, isrequired);
 
 // 建立訂單按鈕
 const onSubmit = () => {
-  if (user.tel === undefined || user.tel === "") {
-    return;
+  if (isrequired(user.tel) !== "需要正確的電話號碼") {
+    const data = {
+      user,
+      message: message.value,
+    };
+    axios
+      .post(`${url}/api/${path}/order`, { data })
+      .then(() => {
+        user.email = "";
+        user.name = "";
+        user.tel = "";
+        user.address = "";
+        message.value = "";
+        alert("訂單建立成功");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
-  const data = {
-    user,
-    message: message.value,
-  };
-  axios
-    .post(`${url}/api/${path}/order`, { data })
-    .then(() => {
-      user.email = "";
-      user.name = "";
-      user.tel = "";
-      user.address = "";
-      message.value = "";
-      alert("訂單建立成功");
-    })
-    .catch((err) => {
-      alert(err);
-    });
 };
 </script>
 
