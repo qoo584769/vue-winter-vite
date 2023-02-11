@@ -22,10 +22,10 @@ Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule]);
 });
 // 中文語系
-loadLocaleFromURL("../zh_TW.json");
+// loadLocaleFromURL("../zh_TW.json");
 // 把本地語系加入主套件
 configure({
-  generateMessage: localize("zh_TW"),
+  generateMessage: localize({zh_TW:loadLocaleFromURL("../zh_TW.json");}),
   validateOnInput: true, // 調整為：輸入文字時，就立即進行驗證
 });
 setLocale("zh_TW");
