@@ -25,7 +25,7 @@ Object.keys(AllRules).forEach((rule) => {
 // loadLocaleFromURL("../zh_TW.json");
 // 把本地語系加入主套件
 configure({
-  generateMessage: localize({zh_TW:loadLocaleFromURL("../zh_TW.json");}),
+  generateMessage: localize({ zh_TW: loadLocaleFromURL("../zh_TW.json") }),
   validateOnInput: true, // 調整為：輸入文字時，就立即進行驗證
 });
 setLocale("zh_TW");
