@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <template v-if="cart.carts">
+      <div v-if="cart.carts">
         <tr v-for="cart in cart.carts.carts" :key="cart.id">
           <td>
             <button
@@ -54,7 +54,7 @@
             {{ cart.product.price }}
           </td>
         </tr>
-      </template>
+      </div>
     </tbody>
     <tfoot>
       <tr>
