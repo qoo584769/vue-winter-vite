@@ -68,7 +68,7 @@
     </tfoot>
   </table>
 
-  <CreateList :cart="cart"></CreateList>
+  <CreateList :cart="cart" @emitGetCart="getCart"></CreateList>
 </template>
 
 <script setup>

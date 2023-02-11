@@ -103,6 +103,7 @@ const message = ref("");
 
 // ---------------------------------------------
 const props = defineProps(["cart", "phone"]);
+const emits = defineEmits(["emitGetCart"]);
 // 驗證電話
 const isrequired = (value) => {
   if (value && value.trim()) {
@@ -134,6 +135,7 @@ const onSubmit = () => {
         user.address = "";
         message.value = "";
         alert("訂單建立成功");
+        emits("emitGetCart");
       })
       .catch((err) => {
         alert(err);
