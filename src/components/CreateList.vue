@@ -42,8 +42,11 @@
           placeholder="請輸入電話"
           rules="required"
           v-model="value"
+          :value="user.tel"
         ></Field>
-        <span class="text-danger" v-if="!isrequired">{{ errorMessage }}</span>
+        <span class="text-danger mt-2 d-block fs-6" v-if="isrequired">{{
+          errorMessage
+        }}</span>
         <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
       </div>
 
@@ -107,8 +110,9 @@ const isrequired = (value) => {
     const phoneNumber = /^(09)[0-9]{8}$/;
     user.tel = value;
     return phoneNumber.test(value) ? true : "需要正確的電話號碼";
+  } else if (value === "") {
+    return value;
   }
-  return false;
 };
 const phoneRef = toRef(props, "phone");
 const { errorMessage, value } = useField(phoneRef, isrequired);
@@ -119,7 +123,7 @@ const onSubmit = () => {
     return;
   }
   const data = {
-    user: user,
+    user,
     message: message.value,
   };
   axios
