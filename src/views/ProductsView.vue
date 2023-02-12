@@ -46,6 +46,14 @@
               </button>
               <button
                 type="button"
+                class="btn btn-outline-secondary"
+                @click="productDetail(product.id)"
+              >
+                <i class="fas fa-spinner fa-pulse"></i>
+                商品細項
+              </button>
+              <button
+                type="button"
                 class="btn btn-outline-danger"
                 @click="addToCart(product.id)"
               >
@@ -64,13 +72,16 @@
 <script setup>
 import { ref, reactive, inject, onMounted } from "vue";
 import Loading from "vue-loading-overlay";
+import { useRouter } from "vue-router";
 import ProductModal from "../components/ProductModal.vue";
 // 網址路徑
 const path = import.meta.env.VITE_PATH;
 const url = import.meta.env.VITE_API;
+const axios = inject("axios");
+// 路由負責導向方法
+const router = useRouter();
 // 取得的產品資料儲存變數
 const products = reactive({ data: [] });
-const axios = inject("axios");
 // 取得產品id打開modal
 const productId = ref("");
 // loading變數
@@ -78,7 +89,6 @@ const isLoading = ref(false);
 // 查看更多按鈕 打開modal
 const openModal = (product_id) => {
   productId.value = product_id;
-  console.log(productId.value);
 };
 
 // ---------------------------------------------------
@@ -90,6 +100,10 @@ const getProducts = () => {
     products.data = res.data.products;
     isLoading.value = false;
   });
+};
+// 詳細商品
+const productDetail = (id) => {
+  router.push(`/products/${id}`);
 };
 // 加入購物車
 const addToCart = (product_id, qty = 1) => {
